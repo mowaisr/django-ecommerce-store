@@ -1,0 +1,49 @@
+ {% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+<h1>🛒 My Cart</h1>
+
+<hr>
+
+{% for item in cart_items %}
+
+<div class="card p-3 mb-3">
+
+<h3>{{ item.product.name }}</h3>
+
+<p>{{ item.product.description }}</p>
+
+<h4>₹{{ item.product.price }}</h4>
+
+<div class="mt-2">
+    <a href="{% url 'decrease_quantity' item.id %}" class="btn btn-warning">-</a>
+
+    <strong class="mx-3">{{ item.quantity }}</strong>
+
+    <a href="{% url 'increase_quantity' item.id %}" class="btn btn-success">+</a>
+</div>
+
+<a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger mt-2">
+    Remove
+</a>
+
+</div>
+
+{% empty %}
+
+<h3>Your cart is empty.</h3>
+
+{% endfor %}
+<hr>
+
+<h2>Total Price: ₹{{ total }}</h2>
+
+<a href="{% url 'checkout' %}" class="btn btn-success mt-3">
+    Proceed to Checkout
+</a>
+
+</div>
+
+{% endblock %}

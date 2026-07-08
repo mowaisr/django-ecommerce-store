@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">🛒 My E-commerce Store</h1>
+    <a href="{% url 'cart' %}" class="btn btn-success mb-3">
+    View Cart
+</a>
+<a href="{% url 'logout' %}" class="btn btn-danger mb-3">
+    Logout
+</a>
+
+    <div class="row">
+
+        {% for product in products %}
+
+        <div class="col-md-4 mb-4">
+            <div class="card p-3">
+                {% if product.image %}
+<img src="{{ product.image.url }}" class="card-img-top" height="250">
+{% endif %}
+                <h4>{{ product.name }}</h4>
+
+                <p>{{ product.description }}</p>
+
+                <h5>₹{{ product.price }}</h5>
+
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">
+    Add to Cart
+</a>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}
